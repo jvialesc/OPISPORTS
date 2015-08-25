@@ -30,11 +30,15 @@ public class ProvinciaTest {
 	@Autowired
 	ProvinciaServiceInterface provinciaService;
 		
+	@Test
+	public void getUsuarioServiceTest(){
+		assertNotNull(provinciaService);
+	}
 	/**
 	 * Metodo encargado de solicitar todos las provincias
 	 * 
 	 */
-	@Test
+	//@Test
 	public void getAll(){	
 		
 		ProvinciaResponse provinciaResponse = new ProvinciaResponse();

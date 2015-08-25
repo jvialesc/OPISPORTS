@@ -5204,7 +5204,7 @@ App.controller('UserBlockController', ['$scope','$state','$rootScope','$http', f
             	
             
         } else {
-        	$state.go('app.configuracion');
+        	$state.go('app.configuracion.registrarUsuario');
         }
     });
     

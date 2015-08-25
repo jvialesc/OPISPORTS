@@ -31,11 +31,15 @@ public class InscripcionTest {
 	@Autowired
 	InscripcionServiceInterface inscripcionServices;
 
+	@Test
+	public void getUsuarioServiceTest(){
+		assertNotNull(inscripcionServices);
+	}
 	/**
 	 * Este método obtiene cada una de las instancias de inscripciones
 	 * registradas en la base de datos
 	 */
-	@Test
+	//@Test
 	public void getAll() {
 
 		InscripcionResponse inscripcionResponse = new InscripcionResponse();
