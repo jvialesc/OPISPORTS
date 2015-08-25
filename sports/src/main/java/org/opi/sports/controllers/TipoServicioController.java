@@ -3,12 +3,14 @@ package org.opi.sports.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.opi.sports.contracts.TipoServicioRequest;
 import org.opi.sports.contracts.TipoServicioResponse;
 import org.opi.sports.ejb.TipoServicio;
 import org.opi.sports.pojo.TipoServicioPOJO;
 import org.opi.sports.services.TipoServicioServiceInterface;
 import org.opi.sports.utils.PojoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,9 +48,11 @@ public class TipoServicioController {
 			List<TipoServicioPOJO> tipoServicioViewList = new ArrayList<TipoServicioPOJO>();
 
 			for (TipoServicio tipoServicio : tipoServicioList) {
-				TipoServicioPOJO tipoServicioView = new TipoServicioPOJO();
-				PojoUtils.pojoMappingUtility(tipoServicioView, tipoServicio);
-				tipoServicioViewList.add(tipoServicioView);
+				if (tipoServicio.getActive() == 1) {
+					TipoServicioPOJO tipoServicioView = new TipoServicioPOJO();
+					PojoUtils.pojoMappingUtility(tipoServicioView, tipoServicio);
+					tipoServicioViewList.add(tipoServicioView);
+				}
 			}
 
 			tipoServicioResponse.setTipoServicio(tipoServicioViewList);
@@ -56,8 +60,58 @@ public class TipoServicioController {
 			tipoServicioResponse.setCodeMessage("Operación Exitosa");
 		} catch (Exception exception) {
 			tipoServicioResponse.setCode(404);
-			tipoServicioResponse.setCodeMessage("En estos momentos el servidor no se encuentra disponible./n"
-					+ "Lamentamos el incoveniente, favor intentar mas tarde");
+			tipoServicioResponse
+					.setCodeMessage("En estos momentos el servidor no se encuentra disponible./n"
+							+ "Lamentamos el incoveniente, favor intentar mas tarde");
+			tipoServicioResponse.setErrorMessage(exception.getMessage());
+		}
+
+		return tipoServicioResponse;
+	}
+
+	@RequestMapping(value = "save", method = RequestMethod.POST)
+	public TipoServicioResponse save(
+			@RequestBody TipoServicioRequest tipoServicioRequest) {
+
+		TipoServicioResponse tipoServicioResponse = new TipoServicioResponse();
+
+		try {
+
+			TipoServicio tipoServicioEJB = new TipoServicio();
+			tipoServicioEJB.setTipoServicio(tipoServicioRequest
+					.getTipoServicio());
+			tipoServicioEJB.setActive((byte) 1);
+			if (tipoServicioRequest.getAccion().equals("Modificar")
+					|| tipoServicioRequest.getAccion().equals("Eliminar")) {
+				tipoServicioEJB.setIdTipoServicio(tipoServicioRequest
+						.getIdTipoServicio());
+			}
+			if (tipoServicioRequest.getAccion().equals("Eliminar")) {
+				tipoServicioEJB.setActive((byte) 0);
+			}
+			tipoServicioService.save(tipoServicioEJB);
+
+			List<TipoServicio> tipoServicioList = tipoServicioService
+					.getAllTipoServicio();
+			List<TipoServicioPOJO> tipoServicioViewList = new ArrayList<TipoServicioPOJO>();
+
+			for (TipoServicio tipoServicio : tipoServicioList) {
+				if (tipoServicio.getActive() == 1) {
+					TipoServicioPOJO tipoServicioView = new TipoServicioPOJO();
+					PojoUtils.pojoMappingUtility(tipoServicioView, tipoServicio);
+					tipoServicioViewList.add(tipoServicioView);
+				}
+			}
+
+			tipoServicioResponse.setTipoServicio(tipoServicioViewList);
+
+			tipoServicioResponse.setCode(200);
+			tipoServicioResponse.setCodeMessage("Operación Exitosa");
+		} catch (Exception exception) {
+			tipoServicioResponse.setCode(404);
+			tipoServicioResponse
+					.setCodeMessage("En estos momentos el servidor no se encuentra disponible./n"
+							+ "Lamentamos el incoveniente, favor intentar mas tarde");
 			tipoServicioResponse.setErrorMessage(exception.getMessage());
 		}
 

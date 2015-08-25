@@ -24,6 +24,21 @@
                 <button ng-click="cancel()" class="btn btn-warning">Cancelar</button>
             </div>
         </script>
+        
+        <script type="text/ng-template" id="/myEliminarModalContent.html">
+            <div class="modal-header">
+                <h4 id="myModalLabel" class="modal-title">{{"Eliminar tipo de servicio"}}</h4>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>¿Seguro desea eliminar el tipo de servicio?</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="tipoServicioForm.eliminar()"type="submit" class="btn btn-primary">Eliminar</button>
+                <button ng-click="cancel()" class="btn btn-warning">Cancelar</button>
+            </div>
+        </script>
         <button ng-click="registrar()" class="btn btn-primary" ><span class="fa fa-plus"></span></button>
 
     </div>

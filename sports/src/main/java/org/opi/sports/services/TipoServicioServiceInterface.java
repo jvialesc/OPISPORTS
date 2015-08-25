@@ -17,4 +17,5 @@ public interface TipoServicioServiceInterface {
 
 	public List<TipoServicio> getAllTipoServicio();
 	public TipoServicio findOne(Integer idTipoServicio);
+	public void save(TipoServicio tipoServicioEJB);
 }

@@ -12,17 +12,35 @@ import org.opi.sports.pojo.TipoServicioPOJO;
  */
 public class TipoServicioRequest extends BasePagingRequest{
 
-	private TipoServicioPOJO tipoServicio;
+	private String tipoServicio;
+	private String accion;
+	private Integer idTipoServicio;
 
-	public TipoServicioPOJO getTipoServicio() {
+	public String getTipoServicio() {
 		return tipoServicio;
 	}
 
-	public void setTipoServicio(TipoServicioPOJO tipoServicio) {
+	public void setTipoServicio(String tipoServicio) {
 		this.tipoServicio = tipoServicio;
 	}
 	
 	public String toString(){
 		return "TipoServiceRequest [tipoServicio=" + tipoServicio  + "]";
+	}
+
+	public String getAccion() {
+		return accion;
+	}
+
+	public void setAccion(String accion) {
+		this.accion = accion;
+	}
+
+	public Integer getIdTipoServicio() {
+		return idTipoServicio;
+	}
+
+	public void setIdTipoServicio(Integer idTipoServicio) {
+		this.idTipoServicio = idTipoServicio;
 	}
 }

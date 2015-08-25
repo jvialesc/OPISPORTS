@@ -1,71 +1,100 @@
 
 <div class="row" ng-controller="EstablecimientosFormController">
-   <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
-   <div class="panel panel-default">
-	   <div class="panel-heading"></div>
-	   <div class="panel-body">
-	   		<form name="formEstablecimiento" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
-               <div class="panel-body">
-            
-                     <legend>Registrar establecimiento deportivo</legend>
+	<toaster-container
+		toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+	<div class="panel panel-default">
+		<div class="panel-heading"></div>
+		<div class="panel-body">
+			<form name="formEstablecimiento" ng-submit="submitForm()"
+				novalidate="" class="form-validate form-horizontal">
+				<div class="panel-body">
 
-                     <div class="col-lg-12">
-                     	<div class="col-lg-6">
-                     		<div>
-                     			<label class="control-label">Nombre</label>
-                           		<input type="text" name="nombre" required="" ng-model="establecimiento.nombre" class="form-control" />
-                           		<span ng-show="validateInput('nombre', 'required')" class="text-danger">Este campo es requerido</span>
-                     		</div>
-                        	<div>
-                        		<label class="control-label">Dirección</label>
-                           		<textarea type="text" name="direccion" required="" ng-model="establecimiento.direccion" rows="2" class="form-control no-resize"></textarea>
-                           		<span ng-show="validateInput('direccion', 'required')" class="text-danger">Este campo es requerido</span>        
-                     		</div>
-							<div>
-                        		<label class="control-label">Teléfono</label>
-                           		<input type="number" name="telefono" required="" ng-model="establecimiento.telefono" class="form-control" />
-                           		<span ng-show="validateInput('telefono', 'required')" class="text-danger">Este campo es requerido</span>
-                           		<span ng-show="validateInput('telefono', 'number')" class="text-danger">Este campo debe ser un número válido</span>
-                     		</div>
-                     	</div>
+					<legend>Registrar establecimiento deportivo</legend>
+
+					<div class="col-lg-12">
 						<div class="col-lg-6">
 							<div>
-                        		<label class="control-label">Página Web</label>
-                                <input type="url" name="paginaWeb" required="" ng-model="establecimiento.paginaWeb" placeholder="http://ejemplo.com" class="form-control" />
-                           		<span ng-show="validateInput('telefono', 'required')" class="text-danger">Este campo es requerido</span>
-                           		<span ng-show="validateInput('paginaWeb', 'url')" class="text-danger">Este campo debe ser un url válido</span>
-                        	</div>
-                      
-				           <div>
-				           	   <label class="control-label">Provincia</label>
-							   <select name="cmbProvincias" required=""  ng-model="idProvincia" class="chosen-select input-md form-control" ng-options="provincia.idProvincia as provincia.provincia for provincia in Provincias" ng-click="buscarCantones()">
-							   </select>
-							   <span ng-show="validateInput('cmbProvincias', 'required')" class="text-danger">Este campo es requerido</span>
-						   </div>
-				       
-				           <div>
-				           		<label class=" control-label">Cantón</label>
-				           		<select name="cmbCantones" required="" ng-model="idCanton" class="chosen-select input-md form-control" ng-options="canton.idCanton as canton.canton for canton in Cantones" ng-click="buscarDistritos()">
-						   		</select>
-						   		<span ng-show="validateInput('cmbProvincias', 'required')" class="text-danger">Este campo es requerido</span>
-				           </div>
-				        
-				           <div>
-				           		<label class="control-label">Distrito</label>
-				           		<select name="cmbDistritos" required="" ng-model="idDistrito" class="chosen-select input-md form-control" ng-options="distrito.idDistrito as distrito.distrito for distrito in Distritos">
-						   		</select>
-						     	<span ng-show="validateInput('cmbProvincias', 'required')" class="text-danger">Este campo es requerido</span> 
-				           </div>	
-                     </div>
-				  </div>
-               </div>  
-               <div class="row">
-				  	<div class="text-center">
-                  		<button type="submit" class="btn btn-info">Registrar</button>
-               	  	</div>
-				  </div>                     
-         </form>
-         
-	   </div>
-   </div>
+								<label class="control-label">Nombre</label> <input type="text"
+									name="nombre" required="" ng-model="establecimiento.nombre"
+									class="form-control" /> <span
+									ng-show="validateInput('nombre', 'required')"
+									class="text-danger">Este campo es requerido</span>
+							</div>
+							<div>
+								<label class="control-label">Dirección</label>
+								<textarea type="text" name="direccion" required=""
+									ng-model="establecimiento.direccion" rows="2"
+									class="form-control no-resize"></textarea>
+								<span ng-show="validateInput('direccion', 'required')"
+									class="text-danger">Este campo es requerido</span>
+							</div>
+							<div>
+								<label class="control-label">Teléfono</label> <input
+									type="number" name="telefono" required=""
+									ng-model="establecimiento.telefono" class="form-control" /> <span
+									ng-show="validateInput('telefono', 'required')"
+									class="text-danger">Este campo es requerido</span> <span
+									ng-show="validateInput('telefono', 'number')"
+									class="text-danger">Este campo debe ser un número válido</span>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label class="control-label">Página Web</label> <input
+									type="url" name="paginaWeb" required=""
+									ng-model="establecimiento.paginaWeb"
+									placeholder="http://ejemplo.com" class="form-control" /> <span
+									ng-show="validateInput('telefono', 'required')"
+									class="text-danger">Este campo es requerido</span> <span
+									ng-show="validateInput('paginaWeb', 'url')" class="text-danger">Este
+									campo debe ser un url válido</span>
+							</div>
+
+							<div>
+								<label class="control-label">Provincia</label> <select
+									name="cmbProvincias" required="" ng-model="idProvincia"
+									class="chosen-select input-md form-control"
+									ng-options="provincia.idProvincia as provincia.provincia for provincia in Provincias"
+									ng-change="buscarCantones()">
+								</select> <span ng-show="validateInput('cmbProvincias', 'required')"
+									class="text-danger">Este campo es requerido</span>
+							</div>
+
+							<div>
+								<label class=" control-label">Cantón</label> <select
+									name="cmbCantones" required="" ng-model="idCanton"
+									class="chosen-select input-md form-control"
+									ng-options="canton.idCanton as canton.canton for canton in Cantones"
+									ng-change="buscarDistritos()">
+								</select> <span ng-show="validateInput('cmbCantones', 'required')"
+									class="text-danger">Este campo es requerido</span>
+							</div>
+
+							<div>
+								<label class="control-label">Distrito</label> 
+								<select name="cmbDistritos" required="" ng-model="idDistrito"
+									class="chosen-select input-md form-control"
+									ng-options="distrito.idDistrito as distrito.distrito for distrito in Distritos">
+								</select> <span ng-show="validateInput('cmbDistritos', 'required')"
+									class="text-danger">Este campo es requerido</span>
+							</div>
+							<div>
+								<label class="control-label">Foto</label>
+								<input type="file" data-button-text="Buscar foto"
+									data-class-button="btn btn-default"
+									data-classinput="form-control inline" nv-file-select="onFileSelect(files)"
+									uploader="uploader" class="form-control" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="text-center">
+							<button type="submit" class="btn btn-info">Registrar</button>
+
+						</div>
+					</div>
+			</form>
+			<button ng-click="probar()" type="submit" class="btn btn-info">Probar</button>
+		</div>
+	</div>
 </div>

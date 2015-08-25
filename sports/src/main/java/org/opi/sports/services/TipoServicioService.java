@@ -39,4 +39,9 @@ public class TipoServicioService implements TipoServicioServiceInterface {
 			throw exception;
 		}
 	}
+
+	public void save(TipoServicio tipoServicio) {
+		tipoServicioRepositorio.save(tipoServicio);
+		
+	}
 }

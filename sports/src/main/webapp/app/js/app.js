@@ -760,7 +760,8 @@ App.controller('LoginFormController', ['$rootScope','$scope', '$http', '$state',
         
         
         
-        if ($scope.loginForm.$valid) {	
+        if ($scope.loginForm.$valid) {
+        	alert(md5.createHash($scope.account.password));
         	$http.post('rest/iniciarSesion/validarUsuario', {
         		correo : $scope.account.email,
         		contrasenna : md5.createHash($scope.account.password)
