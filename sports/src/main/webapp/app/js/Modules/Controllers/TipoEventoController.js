@@ -293,6 +293,7 @@ App.controller('TipoEventoModalController', ['$rootScope','$scope', '$modal','$h
     		        	};
     			toaster.pop(responsedata.type, responsedata.title, responsedata.text);
     			$rootScope.$broadcast('actualizarGrid',responsedata);
+    			$modalInstance.close('closed');
     			}else{
     				$rootScope.errorMessage = data.codeMessage;
             		$state.go('page.error');

@@ -1,8 +1,11 @@
-package org.opi.sports.controllers;
+package org.opi.sports.test;
+
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.opi.sports.contracts.EstablecimientoDeportivoRequest;
 import org.opi.sports.contracts.EstablecimientoDeportivoResponse;
 import org.opi.sports.ejb.EstablecimientoDeportivo;
@@ -12,29 +15,21 @@ import org.opi.sports.pojo.EstablecimientoDeportivoPOJO;
 import org.opi.sports.services.EstablecimientoDeportivoServiceInterface;
 import org.opi.sports.services.UsuarioServiceInterface;
 import org.opi.sports.utils.PojoUtils;
-//import org.opi.sports.services.UsuarioServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Fecha: 13-07-2015 version 1.0
+ * Fecha: 01-08-2015 version 1.0
  * 
- * @author Mauricio Araica Hernández
+ * @author Mauricio Araica
  *
- *         Sprint 01 Descripción: Controllador rest de establecimeintos
- *         deportivos encargada de serializar los objetos y devolverlos al front
- *         end como recibir json y convertirlos en objetos java
+ *Sprint 04 Descripción: Prueba de establecimientos deportivos
  *
  */
+public class EstablecimientoDeportivoTest {
 
-@RestController
-@RequestMapping(value = "rest/establecimientoDeportivo")
-public class EstablecimientoDeportivoController {
-
-	// Variable de tipo EstablecimientoDeportivoServiceInterface
 	@Autowired
 	EstablecimientoDeportivoServiceInterface establecimientoDeportivoService;
 
@@ -45,8 +40,8 @@ public class EstablecimientoDeportivoController {
 	 * Metodo encargado de solicitar todos los establecimientos deportivos
 	 * 
 	 */
-	@RequestMapping(value = "getAll", method = RequestMethod.GET)
-	public EstablecimientoDeportivoResponse getAll() {
+	@Test
+	public void getAll() {
 
 		// Variable de tipo EstablecimientoDeportivoResponse
 		EstablecimientoDeportivoResponse establecimientoResponse = new EstablecimientoDeportivoResponse();
@@ -80,15 +75,15 @@ public class EstablecimientoDeportivoController {
 							+ "Lamentamos el incoveniente, favor intentar mas tarde");
 			establecimientoResponse.setErrorMessage(exception.getMessage());
 		}
-		return establecimientoResponse;
+		assertTrue(establecimientoResponse.getCode() == 200);
 	}
 
 	/**
 	 * Este método obtiene un establecimiento deportivo registrado en la base de
 	 * datos por medio de su id
 	 */
-	@RequestMapping(value = "getEstablecimiento", method = RequestMethod.POST)
-	public EstablecimientoDeportivoResponse getEstablecimiento(
+	@Test
+	public void getEstablecimiento(
 			@RequestBody int idEstablecimiento) {
 
 		EstablecimientoDeportivoResponse establecimientoResponse = new EstablecimientoDeportivoResponse();
@@ -103,8 +98,9 @@ public class EstablecimientoDeportivoController {
 			PojoUtils.pojoMappingUtility(distrito,
 					establecimiento.getDistrito());
 
-			EstablecimientoDeportivoPOJO establecimientoView = EstablecimientoDeportivoHelper.getInstance().convertirEstablecimiento(establecimiento);
-			
+			EstablecimientoDeportivoPOJO establecimientoView = new EstablecimientoDeportivoPOJO();
+			PojoUtils.pojoMappingUtility(establecimientoView, establecimiento);
+
 			establecimientoView.setDistrito(distrito);
 
 			establecimientoResponse
@@ -123,7 +119,7 @@ public class EstablecimientoDeportivoController {
 			establecimientoResponse.setErrorMessage(exception.getMessage());
 		}
 
-		return establecimientoResponse;
+		assertTrue(establecimientoResponse.getCode() == 200);
 
 	}
 
@@ -131,8 +127,8 @@ public class EstablecimientoDeportivoController {
 	 * Metodo de registrar el establecimiento deportivo
 	 * 
 	 */
-	@RequestMapping(value = "save", method = RequestMethod.POST)
-	public EstablecimientoDeportivoResponse save(
+	@Test
+	public void save(
 			@RequestBody EstablecimientoDeportivoRequest establecimientoRequest) {
 		// Esatblecimiento response
 		EstablecimientoDeportivoResponse establecimientoResponse = new EstablecimientoDeportivoResponse();
@@ -165,11 +161,11 @@ public class EstablecimientoDeportivoController {
 			establecimientoResponse.setErrorMessage(exception.getMessage());
 		}
 
-		return establecimientoResponse;
+		assertTrue(establecimientoResponse.getCode() == 200);
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
-	public EstablecimientoDeportivoResponse delete(
+	@Test
+	public void delete(
 			@RequestBody int idEstablecimiento) {
 
 		EstablecimientoDeportivoResponse establecimientoResponse = new EstablecimientoDeportivoResponse();
@@ -201,7 +197,7 @@ public class EstablecimientoDeportivoController {
 			}
 		}
 
-		return establecimientoResponse;
+		assertTrue(establecimientoResponse.getCode() == 200);
 	}
 
 }

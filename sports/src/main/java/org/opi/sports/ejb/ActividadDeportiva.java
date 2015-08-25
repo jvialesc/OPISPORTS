@@ -19,7 +19,8 @@ public class ActividadDeportiva implements Serializable {
 	private int idActividadDeportiva;
 
 	private byte active;
-
+	
+	@Column(unique = true)
 	private String actividadDeportiva;
 
 	//bi-directional many-to-one association to Servicio
