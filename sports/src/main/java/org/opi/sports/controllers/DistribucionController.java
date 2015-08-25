@@ -55,11 +55,16 @@ public class DistribucionController {
 			if (distribucionService.exists(distribucionpojo.getIdDistribucion())) {
 				//distribucionResponse.setRetospojo(retospojo);
 				distribucionResponse.setCode(200);
-				distribucionResponse.setCodeMessage("El centro se asocio correctamente");
-			} else {
+				distribucionResponse.setCodeMessage("El punto de retiro se asocio correctamente");
+			} else if(distribucionpojo.getIdDistribucion() == 0){
+				distribucionResponse.setCode(405);
+				distribucionResponse.setCodeMessage("El punto de retiro ya esta asociado");
+			}else{
+				
 				distribucionResponse.setCode(401);
-				distribucionResponse.setCodeMessage("El centro no se asocio correctamente");
+				distribucionResponse.setCodeMessage("El punto de retiro no se asocio correctamente");
 			}
+	
 		} catch (Exception exception) {
 			distribucionResponse.setCode(404);
 			distribucionResponse

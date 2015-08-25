@@ -60,16 +60,21 @@ App.controller('AsociarController', ['$scope', '$rootScope','toaster','$rootScop
         		 	})
         		.success(function(data){
         			if(data.code == 200){        			
-        			$state.reload();
-        		}else{
-            		$rootScope.errorMessage = data.codeMessage;
-            		$state.go('page.error');
-            	}
-        			
+        				$state.reload();
+        			}
+        			if(data.code == 405){
+        				var responsedata = {
+     				              type:  'error',
+     				              title: 'Punto de retiro',
+     				              text:  data.codeMessage
+     				  }; 
+        			toaster.pop(responsedata.type, responsedata.title, responsedata.text);
+        			}else if(data.code == 401){
+        				$rootScope.errorMessage = data.codeMessage;
+        				$state.go('page.error');
+        			}	
         		});        	
-            	
             } else {
-            	
                 return false;
             }
          
